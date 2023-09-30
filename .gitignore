@@ -1,0 +1,6 @@
+target/
+.idea
+/.allure/
+/src/main/
+/src/test/java/DeleteMe/
+/allure-results/
