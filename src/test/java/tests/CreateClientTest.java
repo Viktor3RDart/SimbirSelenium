@@ -31,10 +31,7 @@ public class CreateClientTest extends BaseStep {
     @BeforeEach
     @Step("Подготовка старта драйвера, переход на страницу")
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-extensions");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         waitRunBeforeStart(driver, 3);
         driver.get(BASIC_URL);
     }
