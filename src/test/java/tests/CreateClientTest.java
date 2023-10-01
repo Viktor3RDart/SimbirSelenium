@@ -38,9 +38,8 @@ public class CreateClientTest extends BaseStep {
         driver.get(BASIC_URL);
     }
 
-
     @Test
-    @DisplayName("Тест №5 - Отображение  3 полей  First Name, Last Name, Post Code")
+    @DisplayName("Тест №05 - Отображение  3 полей  First Name, Last Name, Post Code")
     @Description(value = "Отображение  3 полей  First Name, Last Name, Post Code на вкладке Add Customer")
     @Severity(CRITICAL)
     public void addCustomerFieldsVisabilityTest() {
@@ -54,7 +53,7 @@ public class CreateClientTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №6 - Отображение кнопки  Add Customer")
+    @DisplayName("Тест №06 - Отображение кнопки  Add Customer")
     @Description(value = "Отображение   1 кнопки  Add Customer на вкладке Add Customer")
     @Severity(CRITICAL)
     public void addCustomerButtonVisabilityTest() {
@@ -65,7 +64,7 @@ public class CreateClientTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №7 - Создание клиента без счета")
+    @DisplayName("Тест №07 - Создание клиента без счета")
     @Description(value = "Создание клиента без счета — все поля First Name, Last Name, Post Code  заполнены")
     @Severity(CRITICAL)
     public void createClientWithoutAccountTest() {
@@ -77,7 +76,7 @@ public class CreateClientTest extends BaseStep {
         assertAll(() -> checkField(alertMessageText(driver), CUSTOMER_PAGE_GOOD_TRY_ALERT_MESSAGE_TEXT));
         alertMessageClose(driver);
         clickElement(homePage.getCustomersButton());
-        waitElement(driver,customersPage.getFirstNameTableTitle());
+        waitElement(driver, customersPage.getFirstNameTableTitle());
         assertAll(
                 () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
                 () -> checkIsValueInList(customersPage.getFirstNameList(), FIRST_NAME),
@@ -86,31 +85,45 @@ public class CreateClientTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №8 - Создание клиента — поле First Name не заполнено")
+    @DisplayName("Тест №08 - Создание клиента — поле First Name не заполнено")
     @Description(value = "Создание клиента — поле First Name не заполнено, остальные поля заполнены")
     @Severity(CRITICAL)
     public void createClientWithoutFirstNameTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
         clickElement(homePage.getAddCustomerButton());
         sendKeys(addCustomerPage.getLastNameField(), LAST_NAME);
         sendKeys(addCustomerPage.getPostCodeField(), POST_CODE);
         clickElement(addCustomerPage.getAddCustomerButton());
         assertAll(() -> checkField(alertMessageIsNotDisplayed(driver), CUSTOMER_PAGE_DO_NOT_HAVE_ALERT_MESSAGE));
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getFirstNameTableTitle());
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkIsValueInList(customersPage.getLastNameList(), NULL_TEST_DATA),
+                () -> checkIsValueInList(customersPage.getPostCodeList(), NULL_TEST_DATA));
     }
 
     @Test
-    @DisplayName("Тест №9 - Создание клиента — поле Last Name не заполнено")
+    @DisplayName("Тест №09 - Создание клиента — поле Last Name не заполнено")
     @Description(value = "Создание клиента — поле Last Name не заполнено, остальные поля заполнены")
     @Severity(CRITICAL)
     public void createClientWithoutLastNameTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
         clickElement(homePage.getAddCustomerButton());
         sendKeys(addCustomerPage.getFirstNameField(), FIRST_NAME);
         sendKeys(addCustomerPage.getPostCodeField(), POST_CODE);
         clickElement(addCustomerPage.getAddCustomerButton());
         assertAll(() -> checkField(alertMessageIsNotDisplayed(driver), CUSTOMER_PAGE_DO_NOT_HAVE_ALERT_MESSAGE));
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getFirstNameTableTitle());
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkIsValueInList(customersPage.getFirstNameList(), NULL_TEST_DATA),
+                () -> checkIsValueInList(customersPage.getPostCodeList(), NULL_TEST_DATA));
     }
 
     @Test
@@ -120,11 +133,18 @@ public class CreateClientTest extends BaseStep {
     public void createClientWithoutPostCodeTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
         clickElement(homePage.getAddCustomerButton());
         sendKeys(addCustomerPage.getFirstNameField(), FIRST_NAME);
         sendKeys(addCustomerPage.getLastNameField(), LAST_NAME);
         clickElement(addCustomerPage.getAddCustomerButton());
         assertAll(() -> checkField(alertMessageIsNotDisplayed(driver), CUSTOMER_PAGE_DO_NOT_HAVE_ALERT_MESSAGE));
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getFirstNameTableTitle());
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkIsValueInList(customersPage.getFirstNameList(), NULL_TEST_DATA),
+                () -> checkIsValueInList(customersPage.getLastNameList(), NULL_TEST_DATA));
     }
 
     @Test
@@ -170,13 +190,27 @@ public class CreateClientTest extends BaseStep {
         assertAll(() -> checkField(alertMessageText(driver), OPEN_ACCOUNT_ALERT_MESSAGE_TEXT));
         alertMessageClose(driver);
         clickElement(homePage.getCustomersButton());
-        waitElement(driver,customersPage.getFirstNameTableTitle());
+        waitElement(driver, customersPage.getFirstNameTableTitle());
         assertAll(
                 () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
                 () -> checkIsValueInList(customersPage.getFirstNameList(), FIRST_NAME),
                 () -> checkIsValueInList(customersPage.getLastNameList(), LAST_NAME),
                 () -> checkIsValueInList(customersPage.getPostCodeList(), POST_CODE),
                 () -> checkIsValueInList(customersPage.getAccountNumberList(), TEST_ACCOUNT));
+    }
+
+
+    @Test
+    @DisplayName("Тест №22 - Создание двух идентичных клиентов")
+    @Description(value = "Создание двух идентичных клиентов  — все поля First Name, Last Name, Post Code  совпадают")
+    @Severity(CRITICAL)
+    public void createIdenticalClientsTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        HomePageButtons homePage = new HomePageButtons(driver);
+        clickElement(homePage.getAddCustomerButton());
+        addCustomerPage.createClient();
+        addCustomerPage.createClient();
+        assertAll(() -> checkField(alertMessageText(driver), CUSTOMER_PAGE_DUPLICATES_ALERT_MESSAGE_TEXT));
     }
 
     @AfterEach

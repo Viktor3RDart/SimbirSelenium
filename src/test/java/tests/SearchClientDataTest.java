@@ -19,14 +19,13 @@ import pages.elements.HomePageButtons;
 import static helpers.Endpoints.BASIC_URL;
 import static helpers.Endpoints.CUSTOMER_PAGE_URL;
 import static helpers.TestData.*;
-import static helpers.TestData.TEST_ACCOUNT;
 import static helpers.Wait.waitElement;
 import static helpers.Wait.waitRunBeforeStart;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName(value = "Тест-кейсы Сортировка клиентов")
+@DisplayName(value = "Тест-кейсы Поиск клиента")
 public class SearchClientDataTest extends BaseStep {
 
     private WebDriver driver;
@@ -56,7 +55,7 @@ public class SearchClientDataTest extends BaseStep {
     @DisplayName("Тест №18 - Поиск данных клиента в поле Search Customer  по First Name")
     @Description(value = "Поиск данных клиента в поле Search Customer  по First Name")
     @Severity(NORMAL)
-    public void findClientByFirstNameTest() throws InterruptedException {
+    public void findClientByFirstNameTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         HomePageButtons homePage = new HomePageButtons(driver);
         CustomersPage customersPage = new CustomersPage(driver);
@@ -73,16 +72,96 @@ public class SearchClientDataTest extends BaseStep {
         alertMessageClose(driver);
         // Далее ищем данные по клиенту
         clickElement(homePage.getCustomersButton());
-        waitElement(driver,customersPage.getSearchCustomerField());
-        sendKeys(customersPage.getSearchCustomerField(),FIRST_NAME);
+        waitElement(driver, customersPage.getSearchCustomerField());
+        sendKeys(customersPage.getSearchCustomerField(), FIRST_NAME);
         assertAll(
                 () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
-                () -> checkOnlyOneValueInList(customersPage.getFirstNameList(), FIRST_NAME));
-//                () -> checkOnlyOneValueInList(customersPage.getLastNameList(), LAST_NAME),
-//                () -> checkOnlyOneValueInList(customersPage.getPostCodeList(), POST_CODE),
-//                () -> checkOnlyOneValueInList(customersPage.getAccountNumberList(), TEST_ACCOUNT)
+                () -> checkSearchValueInList(customersPage.getFirstNameList(), FIRST_NAME));
     }
 
+    @Test
+    @DisplayName("Тест №19 - Поиск данных клиента в поле Search Customer  по Last Name")
+    @Description(value = "Поиск данных клиента в поле Search Customer  по Last Name")
+    @Severity(NORMAL)
+    public void findClientByLastNameTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
+        OpenAccountPage accountPage = new OpenAccountPage(driver);
+        // Сначала создается клиент, данные по которому далее будем искать.
+        clickElement(homePage.getAddCustomerButton());
+        addCustomerPage.createClient();
+        assertAll(() -> checkField(alertMessageText(driver), CUSTOMER_PAGE_GOOD_TRY_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        clickElement(homePage.getOpenAccountButton());
+        assertAll(() -> checkVisibility(accountPage.getCustomerNameField()));
+        accountPage.openAccountForClient();
+        assertAll(() -> checkField(alertMessageText(driver), OPEN_ACCOUNT_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        // Далее ищем данные по клиенту
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getSearchCustomerField());
+        sendKeys(customersPage.getSearchCustomerField(), LAST_NAME);
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkSearchValueInList(customersPage.getLastNameList(), LAST_NAME));
+    }
+
+    @Test
+    @DisplayName("Тест №20 - Поиск данных клиента в поле Search Customer  по Post Code")
+    @Description(value = "Поиск данных клиента в поле Search Customer  по Post Code")
+    @Severity(NORMAL)
+    public void findClientByPostCodeTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
+        OpenAccountPage accountPage = new OpenAccountPage(driver);
+        // Сначала создается клиент, данные по которому далее будем искать.
+        clickElement(homePage.getAddCustomerButton());
+        addCustomerPage.createClient();
+        assertAll(() -> checkField(alertMessageText(driver), CUSTOMER_PAGE_GOOD_TRY_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        clickElement(homePage.getOpenAccountButton());
+        assertAll(() -> checkVisibility(accountPage.getCustomerNameField()));
+        accountPage.openAccountForClient();
+        assertAll(() -> checkField(alertMessageText(driver), OPEN_ACCOUNT_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        // Далее ищем данные по клиенту
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getSearchCustomerField());
+        sendKeys(customersPage.getSearchCustomerField(), POST_CODE);
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkSearchValueInList(customersPage.getPostCodeList(), POST_CODE));
+    }
+
+    @Test
+    @DisplayName("Тест №21 - Поиск данных клиента в поле Search Customer  по Account Number")
+    @Description(value = "Поиск данных клиента в поле Search Customer  по Account Number")
+    @Severity(NORMAL)
+    public void findClientByAccountNumberTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        HomePageButtons homePage = new HomePageButtons(driver);
+        CustomersPage customersPage = new CustomersPage(driver);
+        OpenAccountPage accountPage = new OpenAccountPage(driver);
+        // Сначала создается клиент, данные по которому далее будем искать.
+        clickElement(homePage.getAddCustomerButton());
+        addCustomerPage.createClient();
+        assertAll(() -> checkField(alertMessageText(driver), CUSTOMER_PAGE_GOOD_TRY_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        clickElement(homePage.getOpenAccountButton());
+        assertAll(() -> checkVisibility(accountPage.getCustomerNameField()));
+        accountPage.openAccountForClient();
+        assertAll(() -> checkField(alertMessageText(driver), OPEN_ACCOUNT_ALERT_MESSAGE_TEXT));
+        alertMessageClose(driver);
+        // Далее ищем данные по клиенту
+        clickElement(homePage.getCustomersButton());
+        waitElement(driver, customersPage.getSearchCustomerField());
+        sendKeys(customersPage.getSearchCustomerField(), TEST_ACCOUNT);
+        assertAll(
+                () -> checkField(getActualPageUrl(driver), CUSTOMER_PAGE_URL),
+                () -> checkSearchValueInList(customersPage.getAccountNumberList(), TEST_ACCOUNT));
+    }
 
     @AfterEach
     @Step("Закрыть драйвер")

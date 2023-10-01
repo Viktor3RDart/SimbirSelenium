@@ -24,7 +24,6 @@ public class HomePageButtons {
         PageFactory.initElements(driver, this);
     }
 
-
     public WebDriver getDriver() {
         return driver;
     }

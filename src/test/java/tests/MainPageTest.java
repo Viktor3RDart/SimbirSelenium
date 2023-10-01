@@ -37,7 +37,7 @@ public class MainPageTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №1 - Отображение кнопок Экран Manager")
+    @DisplayName("Тест №01 - Отображение кнопок Экран Manager")
     @Description(value = "Отображение кнопок — Add Customer, Open Account, Customers")
     @Severity(BLOCKER)
     public void buttonVisabilityTest() {
@@ -49,7 +49,7 @@ public class MainPageTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №2 - Переход на вкладку: /addCust")
+    @DisplayName("Тест №02 - Переход на вкладку: /addCust")
     @Description(value = "Клик по  кнопке — Add Customer  инициирует переход на вкладку:" +
             " https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/addCust")
     @Severity(BLOCKER)
@@ -63,7 +63,7 @@ public class MainPageTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №3 - Переход на вкладку: /openAccount")
+    @DisplayName("Тест №03 - Переход на вкладку: /openAccount")
     @Description(value = "Клик по  кнопке —  Open Account  инициирует переход на вкладку:" +
             " https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/openAccount")
     @Severity(BLOCKER)
@@ -77,7 +77,7 @@ public class MainPageTest extends BaseStep {
     }
 
     @Test
-    @DisplayName("Тест №4 - Переход на вкладку: /list")
+    @DisplayName("Тест №04 - Переход на вкладку: /list")
     @Description(value = "Клик по  кнопке —  Customers  инициирует переход на вкладку:" +
             " https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/list")
     @Severity(BLOCKER)

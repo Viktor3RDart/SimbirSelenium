@@ -10,12 +10,12 @@ import java.util.List;
 
 public class BaseStep {
 
-    @Step("Проверка соответствия введенного элемента {expected} и полученного {actual}")
+    @Step("Проверка соответствия введенного элемента и полученного")
     public void checkField(Object actual, Object expected) {
         Assert.assertEquals(expected, actual);
     }
 
-    @Step("Проверка видимости элемента {element}")
+    @Step("Проверка видимости элемента")
     public void checkVisibility(WebElement element) {
         Assert.assertTrue(element.isDisplayed());
     }
@@ -25,7 +25,7 @@ public class BaseStep {
         return driver.getCurrentUrl();
     }
 
-    @Step("Ввод данных {text} в поле {element}")
+    @Step("Ввод данных {text} в поле")
     public void sendKeys(WebElement element, String text) {
         element.click();
         element.sendKeys(text);
@@ -34,7 +34,7 @@ public class BaseStep {
     @Step("Найти необходимое значение в столбце")
     public void checkIsValueInList(List<WebElement> list, String testData) {
         ArrayList<String> texts = new ArrayList<>();
-        String check = null;
+        String check = "null";
         for (WebElement l : list
         ) {
             texts.add(l.getText());
@@ -49,18 +49,9 @@ public class BaseStep {
     }
 
     @Step("Найти необходимое значение в столбце")
-    public void checkOnlyOneValueInList(List<WebElement> list, String testData) {
-        String check = null;
-        if (list.size() <= 2) {
-            for (String l : giveListOf(list)) {
-                if (l.equals(testData)) {
-                    check = l;
-                }
-            }
-            checkField(check, testData);
-        } else {
-            throw new AssertionError(
-                    "In this column more then one test data, search is not working correctly");
+    public void checkSearchValueInList(List<WebElement> list, String testData) {
+        for (int i = 0; i < giveListOf(list).size(); i++) {
+            checkField(giveListOf(list).get(i), testData);
         }
     }
 
@@ -73,7 +64,7 @@ public class BaseStep {
         return texts;
     }
 
-    @Step("Клик по элементу {element}")
+    @Step("Клик по элементу")
     public void clickElement(WebElement element) {
         element.click();
     }

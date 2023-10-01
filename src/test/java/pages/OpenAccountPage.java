@@ -84,19 +84,11 @@ public class OpenAccountPage extends BaseStep {
         this.processButton = processButton;
     }
 
-    public List<WebElement> getCustomersList() {
-        return customersList;
-    }
+    public List<WebElement> getCustomersList() { return customersList; }
 
-    public List<WebElement> getCurrencyList() {
-        return currencyList;
-    }
+    public List<WebElement> getCurrencyList() { return currencyList; }
 
-    public void setCustomersList(List<WebElement> customersList) {
-        this.customersList = customersList;
-    }
+    public void setCustomersList(List<WebElement> customersList) { this.customersList = customersList; }
 
-    public void setCurrencyList(List<WebElement> currencyList) {
-        this.currencyList = currencyList;
-    }
+    public void setCurrencyList(List<WebElement> currencyList) { this.currencyList = currencyList; }
 }

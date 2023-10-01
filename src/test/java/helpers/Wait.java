@@ -22,7 +22,6 @@ public class Wait {
 
     @Step("Ожидать появление элемента на странице")
     public static void waitElement(WebDriver driver, WebElement element) {
-        waitMainByAllElements(driver,3).until(ExpectedConditions.visibilityOf(element));
+        waitMainByAllElements(driver, 3).until(ExpectedConditions.visibilityOf(element));
     }
-
 }
