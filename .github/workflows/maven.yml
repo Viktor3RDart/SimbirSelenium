@@ -25,7 +25,6 @@ jobs:
       with:
     # Optional: do not specify to match Chrome's version
         chromedriver-version: '117'
-    - run: chrome --version
     
     - name: Run tests with Maven
       run: mvn -B clean test
