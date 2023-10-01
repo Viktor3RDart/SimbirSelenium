@@ -2,9 +2,9 @@ name: Selenium with jUnit - CI
 
 on:
   push:
-    branches: [ "CheckPullSelenium" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "CheckPullSelenium" ]
+    branches: [ "main" ]
 
 jobs:
   build:
