@@ -20,13 +20,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - uses: browser-actions/setup-chrome@v1
-    with:
-      chrome-version: 117.0.5938.92
-    id: setup-chrome
-     - run:|
-      echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
-      ${{ steps.setup-chrome.outputs.chrome-path }} --version
-
+      with:
+        chrome-version: 117.0.5938.92
+    - run: chrome --version
     
     - name: Run tests with Maven
       run: mvn -B clean test
