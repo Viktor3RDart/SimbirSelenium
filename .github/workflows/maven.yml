@@ -24,7 +24,7 @@ jobs:
     - uses: nanasess/setup-chromedriver@v2
       with:
     # Optional: do not specify to match Chrome's version
-        chromedriver-version: '117'
+        chromedriver-version: '117.0.5938.92'
     
     - name: Run tests with Maven
       run: mvn -B clean test
