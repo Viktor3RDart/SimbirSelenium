@@ -33,6 +33,8 @@ public class CreateClientTest extends BaseStep {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
         waitRunBeforeStart(driver, 3);
         driver.get(BASIC_URL);
