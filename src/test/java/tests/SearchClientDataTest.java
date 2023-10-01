@@ -33,7 +33,9 @@ public class SearchClientDataTest extends BaseStep {
     @BeforeEach
     @Step("Подготовка старта драйвера, переход на страницу")
     public void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
         waitRunBeforeStart(driver, 3);
         driver.get(BASIC_URL);
     }
