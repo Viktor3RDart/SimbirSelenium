@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     
-    - uses: browser-actions/setup-chrome@v117.0.5938.92
+    - uses: browser-actions/setup-chrome@117.0.5938.92
     - run: chrome --version
     
     - name: Run tests with Maven
