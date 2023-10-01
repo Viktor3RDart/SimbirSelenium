@@ -19,12 +19,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - run: |
-          VERSION_STRING="117.0.5938.92"
-          wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${VERSION_STRING}_amd64.deb"
-          sudo dpkg -i "google-chrome-stable_${VERSION_STRING}_amd64.deb"
-    - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
+    - uses: browser-actions/setup-chrome@v1
+    with:
+      chrome-version: 117.0.5938.92
+    id: setup-chrome
+     - run:|
+      echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
+      ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
     
     - name: Run tests with Maven
       run: mvn -B clean test
