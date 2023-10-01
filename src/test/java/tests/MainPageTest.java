@@ -31,6 +31,7 @@ public class MainPageTest extends BaseStep {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        options.addArguments("--disable-extensions");
         driver = new ChromeDriver(options);
         waitRunBeforeStart(driver, 3);
         driver.get(BASIC_URL);
