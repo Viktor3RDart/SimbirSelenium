@@ -32,9 +32,9 @@ public class CreateClientTest extends BaseStep {
     @Step("Подготовка старта драйвера, переход на страницу")
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--remote-allow-origins=*");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
         waitRunBeforeStart(driver, 3);
